@@ -1,5 +1,5 @@
 <?php
- class pageModel {
+ class filteringModel {
      private $connection;
      private $executer;
 
@@ -8,15 +8,16 @@
          include_once 'database/connection.php';
          include_once 'database/queryExecuter.php';
 
-         $this->connection = new dbConnection();
+         $this->connection = new connection();
          $this->executer = new queryExecuter();
      }
 
-     public function getFilterInfo()
+     public function getFilterInfo($field, $searchKey)
      {
          $con = $this->connection->setDbConnection();
 
-         $sql = 'SELECT * FROM students';
+         $sql = 'SELECT * FROM students WHERE ' . $field . '=' + '"' + $searchKey + '"' ;
+         print_r($sql);
 
          $data = $this->executer->selectQueryExecuter($con,$sql);
 
